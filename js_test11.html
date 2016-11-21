@@ -1,0 +1,106 @@
+<!doctype html>
+<!--Test parsing JSON object from api.svsu.edu-->
+<html>
+	
+	<body>
+	
+		<p id="demo"></p>
+		
+		<script>
+			//for 2 extra credit points use the code above to create a 2d array of all the CS and CIS courses and sort the array by course number
+
+			// e is a string that contains a JSON object
+			var e = '{"employees":[{"firstName":"John","lastName":"Doe"},{"firstName":"Anna", "lastName":"Smith"},		{"firstName":"Peter", "lastName":"Jones"}]}';
+			var str = "";
+						
+			var allCourses = [];
+			var csSort = [];
+			var cisSort = [];
+			var combineSort;
+			// j is the JSON object contained in e
+			var j = JSON.parse(e);
+			
+			//document.write(j.employees[0].firstName + " " + j.employees[0].lastName);
+			
+			urlCIS = 'https://api.svsu.edu/courses?prefix=CIS';
+			urlCS = 'https://api.svsu.edu/courses?prefix=CS';
+			/*
+			var getJSON = function(url, callback) {
+				var xhr = new XMLHttpRequest();
+				xhr.open("get",url,true);
+				xhr.responseType = "json";
+				xhr.onload = function() {
+					var status = xhr.status;
+					if (status == 200) {
+						callback(null, xhr.response);
+					} else {
+						callback(status);
+					}
+				};
+				xhr.send();
+				document.write(xhr.responseText);
+			};
+			
+			getJSON(url);
+			*/
+			
+			function getTermsAndInstructors(obj, str){
+				//returns a string containing all terms and first instructors from a JSON object
+				if(obj.courses.length == 0) return str;
+				for(var i = 0; i < obj.courses.length; i++){
+					str = str + obj.courses[i].prefix + "-" + obj.courses[i].courseNumber + " " + obj.courses[i].term + " " + obj.courses[i].instructors[0].username + "<br />";
+				}
+				//document.write(obj.courses.length);
+				return str;
+			}
+			
+			function loadXMLDoc(url, i) {
+			  var xmlhttp;
+			  if (window.XMLHttpRequest) {
+				xmlhttp = new XMLHttpRequest();
+			  } else {
+				// code for older browsers
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			  }
+			  xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var s1 = this.responseText;
+					var obj1 = JSON.parse(s1);
+					//document.getElementById("demo").innerHTML = obj1;
+					allCourses[i] = obj1;
+					//var s2 = getTermsAndInstructors(obj1, str);
+					//document.getElementById("demo").innerHTML += s2;
+				}
+			  };	
+
+			  xmlhttp.open("GET", url, false);
+			  xmlhttp.send();
+			}
+			loadXMLDoc(urlCIS, 0);
+			loadXMLDoc(urlCS, 1);
+
+			function sortCourses(array){
+			array.sort(function (a, b){
+				var courseNumberA=a.courseNumber.toLowerCase(), courseNumberB=b.courseNumber.toLowerCase();
+					if (courseNumberA < courseNumberB) //sort string ascending
+						return -1 ;
+					if (courseNumberA > courseNumberB)
+						return 1;
+					if (courseNumberA == courseNumberB)
+						return 0;
+						})
+					}
+			
+			sortCourses(allCourses);
+			</script>
+		
+		
+
+	</body>
+	
+</html>
+
+
+
+
+

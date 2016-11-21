@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script>
+		$(document).ready(function(){
+			$("#calc").click(function(){
+				var l = $("#length").val();
+				var w = $("#width").val();
+				var area = l * w;
+				var board_length = $("#board_length").val();
+				var board_width = $("#board_width").val();
+				var board_area = board_length*board_width;
+				var board_count = area/board_area;
+				document.getElementById("nob").innerHTML = board_count;
+			});
+		});
+
+		</script>
+	</head>
+	<body>
+		<!--Assume boards are 8x1-->
+		<h1>Calculate Materials for a Deck</h1>
+		
+		Input length: <input type="text" id="length"/> 		Input Board length: <input type="text" id="board_length"/> 
+        <br/>
+		Input width: <input type="text" id="width"/>		Input Board width: <input type="text" id="board_width"/>
+        <br/>
+		<button id = "calc">Calculate</button>
+		<br/><br/>
+		You need <span id = "nob"></span> boards
+		
+	</body>
+</html>
+

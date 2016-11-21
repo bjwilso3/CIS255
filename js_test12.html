@@ -1,0 +1,119 @@
+<!doctype html>
+<!--js HTML DOM http://www.w3schools.com/js/js_htmldom.asp -->
+<html>
+		<style>
+			#container {
+			width: 400px;
+			height: 400px;
+			position: relative;
+			background: cyan;
+			}
+			#animate {
+			width: 50px;
+			height: 50px;
+			top: 350px;
+			position: relative;
+			background: purple;
+			}
+		</style>
+	<body>
+		<h1>My First JavaScript Animation</h1>
+		<p>
+		<button onclick="myMove()">Click Me</button>
+		</p>
+		<div id ="container">
+			<div id ="animate">WEE!</div>
+		</div>
+
+		<p id="js12">Hello</p>
+
+		
+		<script>
+			document.write("Goodbye");
+			var obj = document.getElementById("js12");
+			obj.innerHTML = "So Long";
+			obj.setAttribute("style", "color:red");
+			obj.setAttribute("onclick", "alert('Hey, Dude')");
+			var obj2 = document.createElement("hr");
+			obj.appendChild(obj2);
+			var b = document.body;
+			var ul = document.createElement("ul");
+			b.appendChild(ul);
+			var li1 = document.createElement("li");
+			var li2 = document.createElement("li");
+			var li3 = document.createElement("li");
+			var li4 = document.createElement("li");
+			var li5 = document.createElement("li");
+			li1.innerHTML = "Blue";
+			li2.innerHTML = "Red";
+			li3.innerHTML = "Green";
+			li4.innerHTML = "Black";
+			li5.innerHTML = "Orange";
+			ul.appendChild(li1);
+			ul.appendChild(li2);
+			ul.appendChild(li3);
+			ul.appendChild(li4);
+			ul.appendChild(li5);
+			
+			//Add an ordered list(ol) with 5 li elements to the body. The list items should be Alligator, Bat, Cat, Dog, Elephant
+			var ol = document.createElement("ol");
+			b.appendChild(ol);
+			var li6 = document.createElement("li");
+			var li7 = document.createElement("li");
+			var li8 = document.createElement("li");
+			var li9 = document.createElement("li");
+			var li10 = document.createElement("li");
+			var animalArray = ["Alligator", "Bat", "Cat", "Dog", "Elephant"];
+			li6.innerHTML = animalArray[0];
+			li7.innerHTML = animalArray[1];
+			li8.innerHTML = animalArray[2];
+			li9.innerHTML = animalArray[3];
+			li10.innerHTML = animalArray[4];
+			ol.appendChild(li6);
+			ol.appendChild(li7);
+			ol.appendChild(li8);
+			ol.appendChild(li9);
+			ol.appendChild(li10);
+			
+			//zebra-stripe unordered list
+			var current = ul.firstChild
+			var ns = null;
+			while (current != null) {
+				current.style.backgroundColor = "lightgrey";
+				ns = current.nextSibling;
+				if (ns == null) current = null;
+				else current = ns.nextSibling;
+				
+			}
+			
+			
+			//Very Simple Animations
+			function myMove() {
+			  var elem = document.getElementById("animate");
+			  var toppos = 350;
+			  var leftpos = 0;
+			  var id = setInterval(frame, 5);
+			  function frame() {
+				if (toppos <= 0 || leftpos >= 350) {
+				  clearInterval(id);
+				} else {
+				  toppos--;
+				  leftpos++;
+				  elem.style.top = toppos + 'px';
+				  elem.style.left = leftpos + 'px';
+				}
+			  }
+			}
+			//make the animation go from the lower left to upper right(make red box start in lower left)
+		</script>
+		
+		
+
+	</body>
+	
+</html>
+
+
+
+
+
